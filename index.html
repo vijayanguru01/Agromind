@@ -1,155 +1,283 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Agromind | PSYEC Sivagangai</title>
-  <style>
-    :root {
-      --psyec-blue: #003366;
-      --agromind-green: #2e7d32;
-      --alert-red: #d32f2f;
-      --bg-gray: #f8f9fa;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agromind | PSYEC Sivagangai</title>
 
-    body { font-family: 'Segoe UI', Roboto, sans-serif; background: var(--bg-gray); margin: 0; color: #333; }
-    .top-nav { background: var(--psyec-blue); color: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
-    .college-tag { font-weight: bold; letter-spacing: 1px; font-size: 1.1rem; }
-    .main-content { max-width: 1100px; margin: 30px auto; padding: 0 20px; }
-    .location-banner { background: white; border-left: 5px solid var(--agromind-green); padding: 20px; border-radius: 8px; margin-bottom: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
-    .stat-card { background: white; padding: 30px; border-radius: 12px; text-align: center; border: 1px solid #eee; transition: 0.3s; }
-    .stat-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
-    .label { font-size: 0.8rem; color: #888; text-transform: uppercase; margin-bottom: 10px; display: block; }
-    .value { font-size: 2.5rem; font-weight: 800; color: var(--psyec-blue); }
-    .unit { font-size: 1.2rem; color: #555; }
-    .alarm-status { margin-top: 30px; padding: 25px; border-radius: 12px; text-align: center; font-weight: bold; font-size: 1.2rem; }
-    .normal { background: #e8f5e9; color: var(--agromind-green); border: 1px solid var(--agromind-green); }
-    .warning { background: #ffebee; color: var(--alert-red); border: 2px solid var(--alert-red); animation: blinker 1.5s linear infinite; }
-    @keyframes blinker { 50% { opacity: 0.5; } }
-    footer { background: var(--psyec-blue); color: white; text-align: center; padding: 15px; margin-top: 40px; font-size: 0.95rem; }
-  </style>
+<style>
+:root {
+  --psyec-blue: #003366;
+  --agromind-green: #2e7d32;
+  --alert-red: #d32f2f;
+  --bg-gray: #f8f9fa;
+}
+
+body {
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg-gray);
+  margin: 0;
+  color: #333;
+}
+
+/* Top Bar */
+.top-nav {
+  background: var(--psyec-blue);
+  color: white;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Layout */
+.main-content {
+  max-width: 1100px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+/* Location */
+.location-banner {
+  background: white;
+  border-left: 5px solid var(--agromind-green);
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+}
+
+/* Cards */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.stat-card {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.label {
+  font-size: 0.8rem;
+  color: #888;
+  text-transform: uppercase;
+}
+
+.value {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: var(--psyec-blue);
+}
+
+/* Progress Bars */
+.progress-bar {
+  width: 100%;
+  height: 10px;
+  background: #eee;
+  border-radius: 20px;
+  margin-top: 10px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 20px;
+  transition: width 0.5s ease;
+}
+
+.moisture-fill { background: #2e7d32; }
+.temp-fill { background: #ff9800; }
+.humidity-fill { background: #03a9f4; }
+
+/* Alarm */
+.alarm-status {
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.normal {
+  background: #e8f5e9;
+  color: var(--agromind-green);
+}
+
+.warning {
+  background: #ffebee;
+  color: var(--alert-red);
+  animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0.5; }
+}
+
+/* Buttons */
+button {
+  padding: 10px 20px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+/* Gallery */
+.gallery img {
+  width: 300px;
+  border-radius: 8px;
+  margin: 10px;
+}
+
+/* Footer */
+footer {
+  background: var(--psyec-blue);
+  color: white;
+  text-align: center;
+  padding: 15px;
+  margin-top: 40px;
+}
+</style>
 </head>
+
 <body>
 
+<!-- Top Bar -->
 <div class="top-nav">
-  <div class="college-tag">PSYEC_SIVAGANGAI-AGROMIND</div>
-  <div id="live-clock">Loading Time...</div>
+  <div><strong>PSYEC_SIVAGANGAI-AGROMIND</strong></div>
+  <div id="clock"></div>
 </div>
 
 <div class="main-content">
-  <div class="location-banner">
+
+ <div class="location-banner">
     <strong style="color: var(--psyec-blue);">FIELD LOCATION:</strong> 
     <span>Pandian Saraswathi Yadav Engineering College Garden</span> 
      &nbsp;&nbsp;&nbsp;&nbsp;
     <small id="coords">Coordinates: 9.8433° N, 78.4735° E (Field Station 01)</small>
   </div>
 
-  <div class="stats-grid">
-    <div class="stat-card">
-      <span class="label">Soil Moisture</span>
-      <div class="value" id="moisture-val">--<span class="unit">%</span></div>
-    </div>
-    <div class="stat-card">
-      <span class="label">Field Temperature</span>
-      <div class="value" id="temp-val">--<span class="unit">°C</span></div>
-    </div>
-    <div class="stat-card">
-      <span class="label">Air Humidity</span>
-      <div class="value" id="hum-val">--<span class="unit">%</span></div>
-    </div>
+<!-- Stats -->
+<div class="stats-grid">
+
+<div class="stat-card">
+  <span class="label">Soil Moisture</span>
+  <div class="value" id="moisture-val">--%</div>
+  <div class="progress-bar">
+    <div class="progress-fill moisture-fill" id="moisture-bar"></div>
   </div>
+</div>
 
-  <div id="alarm-box" class="alarm-status normal">
-    SYSTEM STATUS: INITIALIZING DATA...
+<div class="stat-card">
+  <span class="label">Field Temperature</span>
+  <div class="value" id="temp-val">--°C</div>
+  <div class="progress-bar">
+    <div class="progress-fill temp-fill" id="temp-bar"></div>
   </div>
+</div>
 
-  <div style="text-align: center; margin-top: 20px;">
-    <button onclick="simulateDrySoil()" style="padding: 10px 20px; cursor: pointer;">Test Drought Alarm</button>
-    <button onclick="resetData()" style="padding: 10px 20px; cursor: pointer;">Reset Data</button>
+<div class="stat-card">
+  <span class="label">Air Humidity</span>
+  <div class="value" id="hum-val">--%</div>
+  <div class="progress-bar">
+    <div class="progress-fill humidity-fill" id="hum-bar"></div>
   </div>
-  
-  
-  <div style="text-align:center; margin-top:40px;">
-  <h3 style="color:var(--psyec-blue);">🌿 Garden Gallery</h3>
-
-  <!-- Garden Plants -->
-  <img src="https://raw.githubusercontent.com/vijayanguru01/Webimages/refs/heads/main/Agomind%20AI.png" alt="Colorful Garden Plants" 
-       style="width:300px; border-radius:8px; margin:15px;">
-
-  <!-- Flower Garden -->
-  <img src="https://raw.githubusercontent.com/vijayanguru01/Webimages/refs/heads/main/apps.jpg" alt="Flower Garden" 
-       style="width:300px; border-radius:8px; margin:15px;">
-
-  <!-- Vegetable Garden -->
-  <img src="https://raw.githubusercontent.com/vijayanguru01/Webimages/refs/heads/main/fullModel.jpg" alt="Vegetable Garden" 
-       style="width:300px; border-radius:8px; margin:15px;">
-  <!-- Vegetable Garden -->
-  <img src="https://raw.githubusercontent.com/vijayanguru01/Webimages/refs/heads/main/watering.jpg" alt="Vegetable Garden" 
-       style="width:300px; border-radius:8px; margin:15px;">
-
+</div>
 
 </div>
-  
+
+<!-- Alarm -->
+<div id="alarm-box" class="alarm-status normal">
+  SYSTEM INITIALIZING...
+</div>
+
+<div style="text-align:center;">
+  <button onclick="simulateDrySoil()">Test Drought</button>
+  <button onclick="resetData()">Reset</button>
+</div>
+
+<!-- Gallery -->
+<div class="gallery" style="text-align:center; margin-top:40px;">
+  <h3 style="color:var(--psyec-blue);">🌿 Garden Gallery</h3>
+
+  <img src="https://raw.githubusercontent.com/vijayanguru01/Webimages/refs/heads/main/Agomind%20AI.png">
+  <img src="https://raw.githubusercontent.com/vijayanguru01/Webimages/refs/heads/main/apps.jpg">
+  <img src="https://raw.githubusercontent.com/vijayanguru01/Webimages/refs/heads/main/fullModel.jpg">
+  <img src="https://raw.githubusercontent.com/vijayanguru01/Webimages/refs/heads/main/watering.jpg">
+</div>
+
 </div>
 
 <!-- Footer -->
 <footer>
   Developed by Team PSYEC_Agromind: <strong>Rajaram S</strong>, <strong>VijayanGuru</strong>, <strong>Bhuvaneshwaran</strong>, <strong>KaranKumar</strong>
 </footer>
+<!-- Sound -->
+<audio id="beep" loop>
+  <source src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg">
+</audio>
 
-<audio id="beep" loop><source src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg" type="audio/ogg"></audio>
 <script>
-  // Live Clock Logic
-  function updateClock() {
-    const now = new Date();
-    document.getElementById('live-clock').innerText = 
-      now.toLocaleTimeString('en-IN', { hour12: true });
-  }
-  setInterval(updateClock, 1000);
-  updateClock();
 
-  const alarmBox = document.getElementById('alarm-box');
-  const beep = document.getElementById('beep');
+// Clock
+setInterval(() => {
+  document.getElementById('clock').innerText =
+    new Date().toLocaleTimeString('en-IN', { hour12: true });
+}, 1000);
 
-  // Live Sensor Simulation
-  function generateLiveData() {
-    const moisture = Math.floor(Math.random() * (60 - 15 + 1)) + 15; // 15–60%
-    const temp = Math.floor(Math.random() * (38 - 25 + 1)) + 25;     // 25–38 °C
-    const humidity = Math.floor(Math.random() * (80 - 40 + 1)) + 40; // 40–80%
+// Elements
+const alarmBox = document.getElementById('alarm-box');
+const beep = document.getElementById('beep');
 
-    document.getElementById('moisture-val').innerHTML = `${moisture}<span class="unit">%</span>`;
-    document.getElementById('temp-val').innerHTML = `${temp}<span class="unit">°C</span>`;
-    document.getElementById('hum-val').innerHTML = `${humidity}<span class="unit">%</span>`;
+// Data Simulation
+function generateData() {
+  let moisture = Math.floor(Math.random() * 60);
+  let temp = Math.floor(Math.random() * (38 - 25) + 25);
+  let humidity = Math.floor(Math.random() * 80);
 
-    if (moisture < 30) {
-      alarmBox.innerText = "🚨 ALERT: PSYEC FIELD REQUIRES IMMEDIATE WATERING";
-      alarmBox.className = "alarm-status warning";
-      beep.play();
-    } else {
-      alarmBox.innerText = "SYSTEM STATUS: SOIL HYDRATION OPTIMAL";
-      alarmBox.className = "alarm-status normal";
-      beep.pause();
-    }
-  }
+  document.getElementById('moisture-val').innerText = moisture + "%";
+  document.getElementById('temp-val').innerText = temp + "°C";
+  document.getElementById('hum-val').innerText = humidity + "%";
 
-  setInterval(generateLiveData, 5000); // refresh every 5 seconds
-  generateLiveData(); // initial run
+  document.getElementById('moisture-bar').style.width = moisture + "%";
+  document.getElementById('hum-bar').style.width = humidity + "%";
 
-  // Manual Test Buttons
-  function simulateDrySoil() {
-    document.getElementById('moisture-val').innerHTML = `18<span class="unit">%</span>`;
-    alarmBox.innerText = "🚨 ALERT: PSYEC FIELD REQUIRES IMMEDIATE WATERING";
+  let tempPercent = ((temp - 25) / (38 - 25)) * 100;
+  document.getElementById('temp-bar').style.width = tempPercent + "%";
+
+  if (moisture < 30) {
+    alarmBox.innerText = "🚨 ALERT: NEED WATER!";
     alarmBox.className = "alarm-status warning";
     beep.play();
-  }
-
-  function resetData() {
-    document.getElementById('moisture-val').innerHTML = `45<span class="unit">%</span>`;
-    alarmBox.innerText = "SYSTEM STATUS: SOIL HYDRATION OPTIMAL";
+  } else {
+    alarmBox.innerText = "SYSTEM NORMAL";
     alarmBox.className = "alarm-status normal";
     beep.pause();
   }
+}
+
+setInterval(generateData, 4000);
+generateData();
+
+// Buttons
+function simulateDrySoil() {
+  document.getElementById('moisture-val').innerText = "18%";
+  document.getElementById('moisture-bar').style.width = "18%";
+  alarmBox.innerText = "🚨 ALERT: NEED WATER!";
+  alarmBox.className = "alarm-status warning";
+  beep.play();
+}
+
+function resetData() {
+  document.getElementById('moisture-val').innerText = "45%";
+  document.getElementById('moisture-bar').style.width = "45%";
+  alarmBox.innerText = "SYSTEM NORMAL";
+  alarmBox.className = "alarm-status normal";
+  beep.pause();
+}
+
 </script>
 
 </body>
